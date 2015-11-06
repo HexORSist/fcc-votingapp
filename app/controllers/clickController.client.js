@@ -15,6 +15,7 @@
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
    
+   
    $('#addcat').on('click',function(){
       var input = document.createElement('input');
       input.type = 'text';

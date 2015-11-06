@@ -59,5 +59,11 @@ module.exports = function (app, passport) {
 		//.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addPoll)
 		//.delete(isLoggedIn, clickHandler.resetClicks);
+		
+	app.route('/api/:id/modpoll')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/modpolls.html');
+		});
+
 
 };
