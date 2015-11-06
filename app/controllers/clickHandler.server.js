@@ -1,6 +1,7 @@
 'use strict';
 
 var Users = require('../models/users.js');
+var qs = require('qs')
 
 function ClickHandler () {
 	
@@ -12,7 +13,7 @@ function ClickHandler () {
 		});
 		
 		req.on('end', function () {
-            console.log(body);
+            console.log(qs.parse(body));
             //res.json(body);
         });
 		
