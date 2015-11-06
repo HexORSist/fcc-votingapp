@@ -6,6 +6,7 @@
    var deleteButton = document.querySelector('.btn-delete');
    var clickNbr = document.querySelector('#click-nbr');
    var apiUrl = appUrl + '/api/:id/clicks';
+   var apiPollUrl = appUrl + '/api/:id/poll';
 
    function updateClickCount (data) {
       var clicksObject = JSON.parse(data);
@@ -13,6 +14,29 @@
    }
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
+   
+   $('#addcat').on('click',function(){
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.name = 'catname';
+      input.placeholder = 'option ?';
+      $('#cats').append(input,'</br>');
+   });
+   
+   $('#remcat').on('click',function(){
+      $('#cats br:last').remove();
+      $('#cats input:last').remove();
+   });
+   
+   $('#genpoll').on('click',function(){
+      
+      var formdata = $('form').serialize();
+      
+      ajaxFunctions.ajaxRequest('POST', apiPollUrl, formdata, function (data) {
+         
+      });
+
+   });
 
    addButton.addEventListener('click', function () {
 

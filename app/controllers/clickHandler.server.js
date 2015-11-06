@@ -3,6 +3,20 @@
 var Users = require('../models/users.js');
 
 function ClickHandler () {
+	
+	this.addPoll = function (req, res) {
+		var body = '';
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		
+		req.on('end', function () {
+            console.log(body);
+            //res.json(body);
+        });
+		
+	};
 
 	this.getClicks = function (req, res) {
 		Users
