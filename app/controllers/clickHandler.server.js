@@ -15,14 +15,17 @@ function ClickHandler () {
 		req.on('end', function () {
 			body = qs.parse(body);
 			var query = { 'github.id': req.user.github.id };
-			/*var update = {$push: {'pollitems': {$each: [{'pollname': body.pollname}]}},
-						   $push: {'pollitems.pollitem[0].pollname.poll.catagory': body.catname[0]}};*/
 			
 			Users.findOne(query,function(err,data){
+				
 				if (err) {throw err;}
-				//else
+
 				data.pollitems.pollitem.push({'pollname':body.pollname});
-				console.log(data.count());
+				
+				body.catname.forEach(function(elm){
+					data.pollitems.pollitem[data.pollitems.pollitem.length-1].poll.push({'catname': elm});
+				});
+				
 				data.save(function(err,data){
 					if (err) {throw err;}
 				});

@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var poll = new Schema({
-    catagory: String,
+    catname: String,
     rank: Number
     },{ _id: false });
 
