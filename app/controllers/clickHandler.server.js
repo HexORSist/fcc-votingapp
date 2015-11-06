@@ -13,8 +13,11 @@ function ClickHandler () {
 		});
 		
 		req.on('end', function () {
-            console.log(qs.parse(body));
-            //res.json(body);
+			body = qs.parse(body);
+			var query = { 'github.id': req.user.github.id };
+			var update = {$push: {}}
+			
+            console.log(body);
         });
 		
 	};

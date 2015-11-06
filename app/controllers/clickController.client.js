@@ -32,7 +32,7 @@
       
       var formdata = $('form').serialize();
       
-      ajaxFunctions.ajaxRequest('POST', apiPollUrl, formdata, function (data) {
+      ajaxFunctions.ajaxPost('POST', apiPollUrl, formdata, function (data) {
          
       });
 

@@ -13,7 +13,19 @@ var ajaxFunctions = {
 
       document.addEventListener('DOMContentLoaded', fn, false);
    },
-   ajaxRequest: function ajaxRequest (method, url, data, callback) {
+   ajaxRequest: function ajaxRequest (method, url, callback) {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function () {
+         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            callback(xmlhttp.response);
+         }
+      };
+
+      xmlhttp.open(method, url, true);
+      xmlhttp.send();
+   },
+   ajaxPost: function ajaxRequest (method, url, data, callback) {
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function () {
@@ -25,4 +37,5 @@ var ajaxFunctions = {
       xmlhttp.open(method, url, true);
       xmlhttp.send(data);
    }
+
 };
