@@ -6,7 +6,7 @@
    var profileUsername = document.querySelector('#profile-username') || null;
    var profileRepos = document.querySelector('#profile-repos') || null;*/
    var displayName = document.querySelector('#display-name');
-   var pollName = document.querySelector('#poll-name');
+   //var pollName = document.querySelector('#poll-name');
    var apiUrl = appUrl + '/api/:id';
    var apiPollModUrl = appUrl + '/api/:id/pollmod';
 
@@ -28,7 +28,16 @@
    
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiPollModUrl, function (data) {
       var userObject = JSON.parse(data);
-     alert(userObject);
+      
+      userObject.forEach(function(elm){
+         var option = document.createElement('option');
+         option.value = elm;
+         option.innerHTML = elm;
+         $('#poll-name').append(option);
+      });
+      
+      //$('#poll-name')
+      //alert(userObject);
 
       //updateHtmlElement(userObject, displayName, 'displayName');
 
