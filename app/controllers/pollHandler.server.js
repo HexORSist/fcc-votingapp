@@ -13,13 +13,13 @@ function PollHandler () {
 			if (err) {throw err;}
 			
 			data.pollitems.pollitem.forEach(function(elm){
-				//catname.push(elm.pollname.toString());
-				console.log(qs.parse(elm.catname));
+				catname.push(elm.pollname);
+				//console.log(qs.parse(elm));
+				//console.log(elm);
 			});
-			
+			res.json(catname);
+			console.log(catname);
 		});
-		console.log(catname);
-		res.json(catname);
 	};
 
 	/*this.getClicks = function (req, res) {

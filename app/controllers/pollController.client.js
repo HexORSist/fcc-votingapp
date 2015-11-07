@@ -28,7 +28,7 @@
    
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiPollModUrl, function (data) {
       var userObject = JSON.parse(data);
-      alert(userObject);
+     alert(userObject);
 
       //updateHtmlElement(userObject, displayName, 'displayName');
 
