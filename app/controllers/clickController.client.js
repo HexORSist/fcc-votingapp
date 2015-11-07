@@ -2,18 +2,18 @@
 
 (function () {
 
-   var addButton = document.querySelector('.btn-add');
+   /*var addButton = document.querySelector('.btn-add');
    var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');
+   var clickNbr = document.querySelector('#click-nbr');*/
    var apiUrl = appUrl + '/api/:id/clicks';
    var apiPollUrl = appUrl + '/api/:id/poll';
 
-   function updateClickCount (data) {
+   /*function updateClickCount (data) {
       var clicksObject = JSON.parse(data);
       clickNbr.innerHTML = clicksObject.clicks;
-   }
+   }*/
 
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
+   //ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
    
    
    $('#addcat').on('click',function(){
@@ -39,7 +39,7 @@
 
    });
 
-   addButton.addEventListener('click', function () {
+   /*addButton.addEventListener('click', function () {
 
       ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
@@ -53,6 +53,6 @@
          ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
       });
 
-   }, false);
+   }, false);*/
 
 })();

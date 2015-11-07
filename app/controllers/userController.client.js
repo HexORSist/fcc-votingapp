@@ -9,6 +9,7 @@
    var apiUrl = appUrl + '/api/:id';
 
    function updateHtmlElement (data, element, userProperty) {
+      //alert(appUrl);
       element.innerHTML = data[userProperty];
    }
 

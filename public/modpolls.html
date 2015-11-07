@@ -17,14 +17,36 @@
 
 	<body>
 		<div class="container">
-			<br />
+			<br/>
 			<p class="clementine-text">Poll Modify</p>
 		</div>
+		
+		<div class="container">
+		<p>Poll Names:</p>
+		<select id="poll-name">
+		    <option value="volvo">Volvo</option>
+		    <option value="saab">Saab</option>
+		    <option value="mercedes">Mercedes</option>
+		    <option value="audi">Audi</option>
+		</select>
+
+		<form>
+			<p>
+				<input type="text" name="pollname" placeholder="Poll Name"/>
+			</p>
+			<!--<p id="cats">
+				<input type="text" name="catname" placeholder="Option A"/></br>
+				<input type="text" name="catname" placeholder="Option B"/></br>
+			</p>-->
+		</form>
+		</div>
+		
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script type="text/javascript" src="common/ajax-functions.js"></script>
 		<script type="text/javascript" src="controllers/clickController.client.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
+		<script type="text/javascript" src="controllers/pollController.client.js"></script>
+		<!--<script type="text/javascript" src="controllers/userController.client.js"></script>-->
 	</body>
 
 </html>
