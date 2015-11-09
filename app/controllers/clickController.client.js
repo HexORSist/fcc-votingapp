@@ -2,20 +2,8 @@
 
 (function () {
 
-   /*var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');*/
    var apiUrl = appUrl + '/api/:id/clicks';
-   var apiPollUrl = appUrl + '/api/:id/poll';
 
-   /*function updateClickCount (data) {
-      var clicksObject = JSON.parse(data);
-      clickNbr.innerHTML = clicksObject.clicks;
-   }*/
-
-   //ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
-   
-   
    $('#addcat').on('click',function(){
       var input = document.createElement('input');
       input.type = 'text';
@@ -32,11 +20,35 @@
    $('#genpoll').on('click',function(){
       
       var formdata = $('form').serialize();
+      //console.log(formdata)
       
-      ajaxFunctions.ajaxPost('POST', apiPollUrl, formdata, function (data) {
+      ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/poll', formdata, function (data) {
          
       });
 
+   });
+   
+   $('#poll-name').on('change',function(){
+      var pollname = this.value;
+      $('form p').empty();
+      ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollchange', pollname, function (data) {
+         var formdata = JSON.parse(data);
+         formdata.catname.forEach(function(elm,idx){
+               var input = document.createElement('input');
+               input.type = 'text';
+               input.name = 'catname';
+               input.value = elm;
+               $('form p').append(input, '</br>');         
+         });
+      });
+   });
+   
+   $('#rem-poll').on('click',function(){
+      var pollname = $('#poll-name').val();
+      ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollrem', pollname, function (data) {
+         
+      });
+       //alert(pollname);
    });
 
    /*addButton.addEventListener('click', function () {

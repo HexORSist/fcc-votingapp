@@ -1,9 +1,43 @@
 'use strict';
 
 var Users = require('../models/users.js');
-var qs = require('qs')
+var qs = require('qs');
 
 function ClickHandler () {
+	
+	this.onPollChange = function (req, res) {
+		var body = '';
+		var resdata=[];
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		
+		req.on('end', function () {
+
+			Users.findOne({ 'github.id': req.user.github.id}, function(err,data){
+				if (err) {throw err;}
+				
+				data.pollitems.pollitem.forEach(function(elm,idx){
+					//console.log(elm.pollname);
+					if(body==elm.pollname){
+						elm.poll.forEach(function(elm,idx){
+							resdata.push(elm.catname);
+							
+						})
+					}
+				})
+				
+				resdata = '{ "catname": '+JSON.stringify(resdata)+'}';
+				//var resobj = JSON.parse(resdata);
+				
+				//console.log(resobj.constructor.name);
+				res.json(JSON.parse(resdata));
+			
+			});
+			
+		});
+	};
 	
 	this.addPoll = function (req, res) {
 		var body = '';
@@ -14,9 +48,9 @@ function ClickHandler () {
 		
 		req.on('end', function () {
 			body = qs.parse(body);
-			var query = { 'github.id': req.user.github.id };
+			console.log(body);
 			
-			Users.findOne(query,function(err,data){
+			Users.findOne({ 'github.id': req.user.github.id },function(err,data){
 				
 				if (err) {throw err;}
 
@@ -32,7 +66,7 @@ function ClickHandler () {
 				
 			});
 			
-            console.log(body);
+            //console.log(body);
         });
 		
 	};

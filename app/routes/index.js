@@ -62,6 +62,14 @@ module.exports = function (app, passport) {
 		.post(isLoggedIn, clickHandler.addPoll)
 		//.delete(isLoggedIn, clickHandler.resetClicks);
 		
+	app.route('/api/:id/onpollchange')
+		//.get(isLoggedIn, clickHandler.getClicks)
+		.post(isLoggedIn, clickHandler.onPollChange)
+		//.delete(isLoggedIn, clickHandler.resetClicks);
+	
+	app.route('/api/:id/onpollrem')
+		.post(isLoggedIn, pollHandler.remPoll)
+		
 	app.route('/modpoll')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/modpolls.html');

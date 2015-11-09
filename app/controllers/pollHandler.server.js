@@ -5,6 +5,28 @@ var qs = require('qs')
 
 function PollHandler () {
 	
+	this.remPoll = function (req, res) {
+		var body = '';
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		
+		req.on('end', function () {
+			Users.findOne({ 'github.id': req.user.github.id },function(err,data){
+				if (err) {throw err;}
+				data.pollitems.pollitem.forEach(function(elm,idx){
+					if(elm.pollname.toString()===body.toString()){
+						data.pollitems.pollitem[idx].remove();
+						//console.log("match");
+						//console.log(elm.pollname.toString()+body.toString())
+					}
+				});
+			});
+		});
+	};
+	
+	
 	this.getPolls = function (req, res) {
 		var catname = [];
 		var query = { 'github.id': req.user.github.id };
@@ -18,7 +40,7 @@ function PollHandler () {
 				//console.log(elm);
 			});
 			res.json(catname);
-			console.log(catname);
+			//console.log(catname);
 		});
 	};
 
