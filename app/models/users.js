@@ -11,7 +11,7 @@ var poll = new Schema({
 var polls = new Schema({
     pollname: String,
     poll: [poll]
-    },{ _id: false })
+    },{ _id: true })
 
 var User = new Schema({
 	github: {

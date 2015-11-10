@@ -21,11 +21,9 @@
       
       var formdata = $('form').serialize();
       //console.log(formdata)
-      
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/poll', formdata, function (data) {
          
       });
-
    });
    
    $('#poll-name').on('change',function(){
@@ -46,7 +44,9 @@
    $('#rem-poll').on('click',function(){
       var pollname = $('#poll-name').val();
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollrem', pollname, function (data) {
-         
+         //$('#poll-name').trigger('change');
+         $('#poll-name option:selected').remove();
+         //$('#poll-name').trigger('change');
       });
        //alert(pollname);
    });

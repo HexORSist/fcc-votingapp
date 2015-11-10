@@ -25,6 +25,8 @@
          option.innerHTML = elm;
          $('#poll-name').append(option);
       });
+      
+      $('#poll-name').trigger('change');
    }));
    
    

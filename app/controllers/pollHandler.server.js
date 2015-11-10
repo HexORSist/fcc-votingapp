@@ -13,16 +13,17 @@ function PollHandler () {
 		});
 		
 		req.on('end', function () {
-			Users.findOne({ 'github.id': req.user.github.id },function(err,data){
+			Users.findOne({ 'github.id': req.user.github.id},function(err,User){
 				if (err) {throw err;}
-				data.pollitems.pollitem.forEach(function(elm,idx){
-					if(elm.pollname.toString()===body.toString()){
-						data.pollitems.pollitem[idx].remove();
-						//console.log("match");
-						//console.log(elm.pollname.toString()+body.toString())
+				User.pollitems.pollitem.forEach(function(elm,idx){
+					if(elm.pollname.toString()==body.toString()){
+						User.pollitems.pollitem[idx].remove();
+						//console.log(body.toString());
 					}
+					User.save();
 				});
 			});
+			
 		});
 	};
 	
