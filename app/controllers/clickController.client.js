@@ -22,7 +22,8 @@
       var formdata = $('form').serialize();
       //console.log(formdata)
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/poll', formdata, function (data) {
-         
+         if(data)
+            alert(data);
       });
    });
    
@@ -44,27 +45,17 @@
    $('#rem-poll').on('click',function(){
       var pollname = $('#poll-name').val();
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollrem', pollname, function (data) {
-         //$('#poll-name').trigger('change');
-         $('#poll-name option:selected').remove();
-         //$('#poll-name').trigger('change');
+         
       });
-       //alert(pollname);
+      location.reload();
    });
-
-   /*addButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
+   
+   $('#save-poll').on('click',function(){
+      var formdata = $('form').serialize();
+      formdata+='&pollname='+$('#poll-name option:selected').val();
+      ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollsave', formdata, function (data) {
+         location.reload();
       });
-
-   }, false);
-
-   deleteButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);*/
+   });
 
 })();

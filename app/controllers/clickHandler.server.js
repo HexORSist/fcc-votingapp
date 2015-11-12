@@ -20,7 +20,7 @@ function ClickHandler () {
 				
 				data.pollitems.pollitem.forEach(function(elm,idx){
 					//console.log(elm.pollname);
-					if(body==elm.pollname){
+					if(body.toString()==elm.pollname.toString()){
 						elm.poll.forEach(function(elm,idx){
 							resdata.push(elm.catname);
 							
@@ -48,22 +48,32 @@ function ClickHandler () {
 		
 		req.on('end', function () {
 			body = qs.parse(body);
-			console.log(body);
+			//console.log(body);
 			
 			Users.findOne({ 'github.id': req.user.github.id },function(err,data){
+				var match = false;
 				
 				if (err) {throw err;}
+				
+				data.pollitems.pollitem.forEach(function(elm){
+					//console.log(elm.pollname.toString());
+					if (elm.pollname.toString()==body.pollname.toString()){
+						match=true;
+					}
+				});
+				
+				if(!match){
+					data.pollitems.pollitem.push({'pollname':body.pollname});
+					body.catname.forEach(function(elm){
+						data.pollitems.pollitem[data.pollitems.pollitem.length-1].poll.push({'catname': elm});
+					});
+					data.save(function(err,data){
+						if (err) {throw err;}
+					});
+				} else {
+					res.send("This Poll already exists please give it another name.")
+				}
 
-				data.pollitems.pollitem.push({'pollname':body.pollname});
-				
-				body.catname.forEach(function(elm){
-					data.pollitems.pollitem[data.pollitems.pollitem.length-1].poll.push({'catname': elm});
-				});
-				
-				data.save(function(err,data){
-					if (err) {throw err;}
-				});
-				
 			});
 			
             //console.log(body);

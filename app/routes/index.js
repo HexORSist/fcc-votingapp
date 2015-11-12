@@ -70,6 +70,10 @@ module.exports = function (app, passport) {
 	app.route('/api/:id/onpollrem')
 		.post(isLoggedIn, pollHandler.remPoll)
 		
+	app.route('/api/:id/onpollsave')
+		.post(isLoggedIn, pollHandler.savePoll)
+
+		
 	app.route('/modpoll')
 		.get(isLoggedIn, function (req, res) {
 			res.sendFile(path + '/public/modpolls.html');
