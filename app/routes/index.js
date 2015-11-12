@@ -79,6 +79,12 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/modpolls.html');
 		});
 		
+	app.route('/pollurl')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/pollurl.html');
+		});
+
+		
 	app.route('/api/:id/pollmod')
 		.get(isLoggedIn, pollHandler.getPolls)
 		//.post(isLoggedIn, clickHandler.addPoll)

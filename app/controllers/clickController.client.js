@@ -24,7 +24,9 @@
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/poll', formdata, function (data) {
          if(data)
             alert(data);
+         
       });
+      window.location = appUrl+"/pollurl";
    });
    
    $('#poll-name').on('change',function(){
