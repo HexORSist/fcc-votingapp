@@ -4,7 +4,7 @@
 
    var apiUrl = appUrl + '/api/:id/clicks';
 
-   $('#addcat').on('click',function(){
+   /*$('#addcat').on('click',function(){
       var input = document.createElement('input');
       input.type = 'text';
       input.name = 'catname';
@@ -51,14 +51,22 @@
          
       });
       location.reload();
-   });
+   });*/
+   
+   
    
    $('#save-poll').on('click',function(){
-      var formdata = $('form').serialize();
+      /*var formdata = $('form').serialize();
       formdata+='&pollname='+$('#poll-name option:selected').val();
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollsave', formdata, function (data) {
          location.reload();
-      });
+      });*/
+      alert("test");
    });
 
 })();
+
+$(document).ready(function() {
+      $('#user-poll-name').text("test");
+      
+});

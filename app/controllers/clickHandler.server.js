@@ -41,6 +41,7 @@ function ClickHandler () {
 	
 	this.addPoll = function (req, res) {
 		var body = '';
+		var resdata = [];
 		
 		req.on('data', function(data){
 			body+=data;
@@ -70,8 +71,19 @@ function ClickHandler () {
 					data.save(function(err,data){
 						if (err) {throw err;}
 					});
+					
+					//resdata = '{ "pollname": '+ JSON.stringify(body.pollname) +', "username": '+ JSON.stringify(req.user.github.username)+ '}';
+					resdata = 'pollname='+body.pollname+'&username='+req.user.github.username;
+					
+					//console.log(resdata);
+					//console.log(JSON.parse(resdata));
+					res.send(resdata);
+				
+					
 				} else {
-					res.send("This Poll already exists please give it another name.")
+					
+					
+					res.send('failure');
 				}
 
 			});
