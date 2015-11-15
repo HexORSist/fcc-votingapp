@@ -5,6 +5,22 @@ var qs = require('qs');
 
 function ClickHandler () {
 	
+	this.getpoll = function (req, res) {
+		var body = '';
+		var resdata=[];
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		//console.log("test");
+		req.on('end', function () {
+			
+			resdata = '?pollname='+body+'&username='+req.user.github.username;
+			res.send(resdata);
+			
+		});
+	};
+	
 	this.onPollChange = function (req, res) {
 		var body = '';
 		var resdata=[];
@@ -73,7 +89,7 @@ function ClickHandler () {
 					});
 					
 					//resdata = '{ "pollname": '+ JSON.stringify(body.pollname) +', "username": '+ JSON.stringify(req.user.github.username)+ '}';
-					resdata = 'pollname='+body.pollname+'&username='+req.user.github.username;
+					resdata = '?pollname='+body.pollname+'&username='+req.user.github.username;
 					
 					//console.log(resdata);
 					//console.log(JSON.parse(resdata));

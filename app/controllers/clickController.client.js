@@ -30,6 +30,20 @@
       
    });
    
+   $('#share-poll').on('click',function(){
+      var pollname = $('#poll-name option:selected').val();
+      //var formdata = $('form').serialize();
+      //console.log(formdata)
+      //alert(pollname);
+      ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/sharepoll', pollname, function (data) {
+         if(data.toString()=='failure')
+            alert('pollname already exists');
+         else
+            window.location = appUrl+"/userpoll/"+data;
+      });
+      
+   });
+   
    $('#poll-name').on('change',function(){
       var pollname = this.value;
       $('form p').empty();

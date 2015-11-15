@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
 
 	var clickHandler = new ClickHandler();
 	var pollHandler = new PollHandler();
-	var userpollHandler = new PollHandler();
+	var userpollHandler = new UserPollHandler();
 
 	app.route('/')
 		.get(isLoggedIn, function (req, res) {
@@ -60,9 +60,15 @@ module.exports = function (app, passport) {
 		.delete(isLoggedIn, clickHandler.resetClicks);*/
 		
 	app.route('/api/:id/poll')
-		//.get(isLoggedIn, clickHandler.getClicks)
+		//.get(isLoggedIn, clickHandler.getpoll)
 		.post(isLoggedIn, clickHandler.addPoll)
 		//.delete(isLoggedIn, clickHandler.resetClicks);
+		
+	app.route('/api/:id/sharepoll')
+		//.get(isLoggedIn, clickHandler.getpoll)
+		.post(isLoggedIn, clickHandler.getpoll);
+	
+		
 		
 	app.route('/api/:id/onpollchange')
 		//.get(isLoggedIn, clickHandler.getClicks)
@@ -85,6 +91,10 @@ module.exports = function (app, passport) {
 		.get(function (req, res) {
 			res.sendFile(path + '/public/userpoll.html');
 		});
+		
+	app.route('/userpollinfo')
+	.post( userpollHandler.userPollinfo);
+
 		
 	/*app.route('/pollurl')
 		.get(isLoggedIn, function (req, res) {

@@ -5,7 +5,39 @@ var qs = require('qs')
 
 function UserPollHandler () {
 	
-	this.savePoll = function (req, res) {
+	this.userPollinfo = function (req, res) {
+		var body = '';
+		var resdata = [];
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		
+		req.on('end', function () {
+			body = JSON.parse(body);
+			console.log(body);
+			
+			Users.findOne({ 'github.username': body.username}, function(err,data){
+				if (err) {throw err;}
+				
+				data.pollitems.pollitem.forEach(function(elm,idx){
+					if(body.pollname.toString()==elm.pollname.toString()){
+						//console.log(elm.pollname.toString());
+						elm.poll.forEach(function(elm,idx){
+							resdata.push(elm);
+							//console.log(elm.catname.toString())
+							
+						});
+					console.log(resdata);
+					}
+				});
+			});
+		});
+		
+	};
+
+	
+	/*this.savePoll = function (req, res) {
 		var body = '';
 		
 		req.on('data', function(data){
@@ -30,7 +62,7 @@ function UserPollHandler () {
 	};
 
 	
-	/*this.remPoll = function (req, res) {
+	this.remPoll = function (req, res) {
 		var body = '';
 		
 		req.on('data', function(data){

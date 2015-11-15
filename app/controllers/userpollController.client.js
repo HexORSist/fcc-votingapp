@@ -61,12 +61,26 @@
       ajaxFunctions.ajaxPost('POST', appUrl + '/api/:id/onpollsave', formdata, function (data) {
          location.reload();
       });*/
-      alert("test");
+      //alert("test");
    });
 
 })();
 
 $(document).ready(function() {
-      $('#user-poll-name').text("test");
+   var pairs = location.search.slice(1).split('&');
+   
+   var result = {};
+   pairs.forEach(function(pair) {
+       pair = pair.split('=');
+       result[pair[0]] = decodeURIComponent(pair[1] || '');
+   });    
+     
+     
+   //result=JSON.parse(JSON.stringify(result));
+   //result=JSON.stringify(result);
+   
+   ajaxFunctions.ajaxPost('POST', appUrl + '/userpollinfo', JSON.stringify(result), function (data) {
+         //location.reload();
+   });
       
 });
