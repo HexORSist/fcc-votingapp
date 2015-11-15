@@ -15,7 +15,7 @@ function UserPollHandler () {
 		
 		req.on('end', function () {
 			body = JSON.parse(body);
-			console.log(body);
+			//console.log(body);
 			
 			Users.findOne({ 'github.username': body.username}, function(err,data){
 				if (err) {throw err;}
@@ -28,7 +28,8 @@ function UserPollHandler () {
 							//console.log(elm.catname.toString())
 							
 						});
-					console.log(resdata);
+					//console.log(resdata);
+					res.send(resdata);
 					}
 				});
 			});

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var poll = new Schema({
     catname: String,
-    rank: Number
+    rank: {type:Number,default:0}
     },{ _id: false });
 
 var polls = new Schema({

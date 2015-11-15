@@ -80,7 +80,17 @@ $(document).ready(function() {
    //result=JSON.stringify(result);
    
    ajaxFunctions.ajaxPost('POST', appUrl + '/userpollinfo', JSON.stringify(result), function (data) {
-         //location.reload();
+         
+         $('#user-poll-name').append(result.pollname);
+         
+         data = JSON.parse(data)
+         
+         data.forEach(function(elm,idx){
+            $('form p').append(elm.catname, '</br>');
+            //alert(elm.catname);
+         });
+         
+         //alert(data[0].catname);
    });
       
 });
