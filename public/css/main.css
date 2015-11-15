@@ -202,3 +202,21 @@ span {
 	display: inline;
 	margin: 0;
 }
+
+#user-poll-name {
+	border: 1px;
+	/*color: red;*/
+	border-style: solid;
+	border-radius: 1px;
+	width: 200px;
+	margin: auto;
+}
+
+#cat-name {
+	border: 1px;
+	/*color: red;*/
+	border-style: solid;
+	border-radius: 1px;
+	width: 200px;
+	margin: auto;
+}

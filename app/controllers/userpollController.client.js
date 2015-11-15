@@ -67,6 +67,7 @@
 })();
 
 $(document).ready(function() {
+   
    var pairs = location.search.slice(1).split('&');
    
    var result = {};
@@ -74,11 +75,7 @@ $(document).ready(function() {
        pair = pair.split('=');
        result[pair[0]] = decodeURIComponent(pair[1] || '');
    });    
-     
-     
-   //result=JSON.parse(JSON.stringify(result));
-   //result=JSON.stringify(result);
-   
+
    ajaxFunctions.ajaxPost('POST', appUrl + '/userpollinfo', JSON.stringify(result), function (data) {
          
          $('#user-poll-name').append(result.pollname);
@@ -86,11 +83,15 @@ $(document).ready(function() {
          data = JSON.parse(data)
          
          data.forEach(function(elm,idx){
-            $('form p').append(elm.catname, '</br>');
-            //alert(elm.catname);
+            var input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'catname';
+            //input.value = elm.catname;
+
+            $('form').append(input,elm.catname+': '+elm.rank+'</br>');
+         
          });
          
-         //alert(data[0].catname);
    });
       
 });
