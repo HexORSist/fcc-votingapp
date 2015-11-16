@@ -92,8 +92,12 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/userpoll.html');
 		});
 		
+	app.route('/userpollinc')
+		.post( userpollHandler.userPollinc);
+		
 	app.route('/userpollinfo')
-	.post( userpollHandler.userPollinfo);
+		.post( userpollHandler.userPollinfo);
+
 
 		
 	/*app.route('/pollurl')

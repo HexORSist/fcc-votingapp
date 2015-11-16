@@ -5,6 +5,38 @@ var qs = require('qs')
 
 function UserPollHandler () {
 	
+	this.userPollinc = function (req, res) {
+		var body = '';
+		var resdata = [];
+		
+		req.on('data', function(data){
+			body+=data;
+		});
+		
+		req.on('end', function () {
+			body = JSON.parse(body);
+			
+			Users.findOne({ 'github.username': body.username}, function(err,data){
+				if (err) {throw err;}
+				
+				data.pollitems.pollitem.forEach(function(elm,idx){
+					if(body.pollname.toString()==elm.pollname.toString()){
+						elm.poll.forEach(function(elm,idx){
+							if(body.catname.toString()==elm.catname.toString()){
+								elm.rank+=1;
+							//resdata.push(elm);
+							//console.log(elm.catname.toString())
+							}
+						});
+					}
+				});
+				data.save();
+			});
+			//Users.save();
+			//console.log(body);
+		});
+	};
+
 	this.userPollinfo = function (req, res) {
 		var body = '';
 		var resdata = [];

@@ -86,12 +86,27 @@ $(document).ready(function() {
             var input = document.createElement('input');
             input.type = 'radio';
             input.name = 'catname';
-            //input.value = elm.catname;
+            input.value = elm.catname;
 
             $('form').append(input,elm.catname+': '+elm.rank+'</br>');
          
          });
          
+   });
+   
+   $('#cat-name').on('change',function(){
+      
+      
+      $('#cat-name input:radio').attr('disabled', true);
+      
+      //result.push({catname: 'test' });
+      result.catname = $('#cat-name input[name="catname"]:checked').val();
+      
+      //alert(JSON.stringify(result));
+      
+      ajaxFunctions.ajaxPost('POST', appUrl + '/userpollinc', JSON.stringify(result), function (data) {
+      
+      });
    });
       
 });
